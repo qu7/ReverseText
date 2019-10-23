@@ -1,2 +1,2 @@
 # ReverseText
-Reverses the word and letter order of a paragraph.
+Reverses the word or letter order (or both) of a paragraph.
