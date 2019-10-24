@@ -49,40 +49,42 @@ public class ReverseText extends JFrame {
 	
 	// reverse word order
 	public void wordReverse (String getText) {
-		String message;
-		String input = getText;
+		String message = getText;
 		String reverseW = "";
 		String word = "";
 		ArrayList wordlist = new ArrayList<String>();
-		String stop = " ";
-		message = input + stop;
 		int wordCount = 0;
-		
-		char space = ' ';
 		char letter;
 		
-		for (int i = 0; i < message.length(); i ++) {
+		for (int i = 0; i < message.length(); i++) {
 			letter = message.charAt(i);
-			if (letter != space) {
+			if (letter != ' ') {
 				word = word + letter;
 			}
+			else if (i == message.length() - 1) {
+				word = word + " ";
+				wordlist.add(word);
+				word = "";
+			}
 			else {
+				word = word + " ";
 				wordlist.add(word);
 				word = "";
 			}
 		}
 		
 		for (int i = wordlist.size() - 1; i >= 0; i--) {
-			reverseW = reverseW + wordlist.get(i) + stop;
+			reverseW = reverseW + wordlist.get(i);
 			wordCount++;
 		}
 		
+		// sets the new text
 		txtEnterYourText.setText(reverseW);
 		lblWordCount.setText("Words: " + wordCount);
-
+		wordCount = 0;
 	}
 	
-	// reverse word order
+	// reverse letter order
 	public void letterReverse (String getText) {
 		String message;
 		String input = getText;
@@ -96,24 +98,26 @@ public class ReverseText extends JFrame {
 		char space = ' ';
 		char letter;
 		
-		// displays all characters in reverse
-		for (int i = message.length()-1; i >= 0; i--) {
+		// displays all characters in reverse		
+		for (int i = message.length() - 1; i >= 0; i--) {
 			letter = message.charAt(i);
 			reverseL = reverseL + letter;
 		}
 		
 		for (int i = wordlist.size() - 1; i >= 0; i--) {
-			reverseL = reverseL + wordlist.get(i) + stop;
+			wordlist.get(i);
 			wordCount++;
 		}
 		
+		// sets the new text
 		txtEnterYourText.setText(reverseL);
 		lblWordCount.setText("Words: " + wordCount);
+		wordCount = 0;
 	}
 	
 	public static void main(String args[]) {
 		ReverseText window = new ReverseText();
-		window.setSize(new Dimension(600, 400));
+		window.setSize(new Dimension(450, 300));
 		window.setVisible(true);
 	}
 }
