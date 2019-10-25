@@ -8,10 +8,13 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class ReverseText extends JFrame {
 	JTextArea txtEnterYourText = new JTextArea();
 	JLabel lblWordCount = new JLabel();
+	boolean isFirstClick = true;
 	
 	public ReverseText() {
 		getContentPane().setLayout(null);
@@ -20,6 +23,16 @@ public class ReverseText extends JFrame {
 			public void keyTyped(KeyEvent arg0) {
 				final String getText = txtEnterYourText.getText();
 				wordCount(getText);
+			}
+		});
+
+		txtEnterYourText.addMouseListener(new MouseAdapter(){
+			@Override
+			public void mouseClicked(MouseEvent e){
+				if(isFirstClick) {
+					txtEnterYourText.setText("");
+					isFirstClick = false;
+				}
 			}
 		});
 		
@@ -61,7 +74,7 @@ public class ReverseText extends JFrame {
 		String message = getText;
 		String reverseW = "";
 		String word = "";
-		ArrayList wordlist = new ArrayList<String>();
+		ArrayList<String> wordlist = new ArrayList<String>();
 		char letter;
 		
 		for (int i = 0; i < message.length(); i++) {
@@ -119,7 +132,7 @@ public class ReverseText extends JFrame {
 	public void wordCount(String getText) {
 		String message = getText;
 		String word = "";
-		ArrayList wordlist = new ArrayList<String>();
+		ArrayList<String> wordlist = new ArrayList<String>();
 		char letter;
 		
 		for (int i = 0; i < message.length(); i++) {
