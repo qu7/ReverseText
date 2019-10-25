@@ -6,6 +6,8 @@ import javax.swing.JLabel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class ReverseText extends JFrame {
 	JTextArea txtEnterYourText = new JTextArea();
@@ -13,6 +15,13 @@ public class ReverseText extends JFrame {
 	
 	public ReverseText() {
 		getContentPane().setLayout(null);
+		txtEnterYourText.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent arg0) {
+				final String getText = txtEnterYourText.getText();
+				wordCount(getText);
+			}
+		});
 		
 		txtEnterYourText.setColumns(3);
 		txtEnterYourText.setTabSize(5);
@@ -53,7 +62,64 @@ public class ReverseText extends JFrame {
 		String reverseW = "";
 		String word = "";
 		ArrayList wordlist = new ArrayList<String>();
-		int wordCount = 0;
+		char letter;
+		
+		for (int i = 0; i < message.length(); i++) {
+			letter = message.charAt(i);
+			if (i == message.length() - 1) {
+				word = word + letter;
+				wordlist.add(word);
+			}
+			else if (letter != ' ') {
+				word = word + letter;
+			}
+			else {
+				wordlist.add(word);
+				System.out.println(word);
+				word = "";
+			}
+		}
+		
+		txtEnterYourText.setText("");
+		for (int i = wordlist.size() - 1; i >= 0; i--) {
+			if (i == 0) {
+				txtEnterYourText.append(wordlist.get(i) + "");
+			}
+			else {
+				txtEnterYourText.append(wordlist.get(i) + " ");
+			}
+		}
+		
+		// sets the new text
+	//	txtEnterYourText.setText(reverseW);
+	}
+	
+	// reverse letter order
+	public void letterReverse (String getText) {
+		String message = getText;
+		String reverseL = "";
+		String word = "";
+		ArrayList wordlist = new ArrayList<String>();
+		char letter;
+		
+		// displays all characters in reverse		
+		for (int i = message.length() - 1; i >= 0; i--) {
+			letter = message.charAt(i);
+			reverseL = reverseL + letter;
+		}
+		
+		for (int i = wordlist.size() - 1; i >= 0; i--) {
+			wordlist.get(i);
+		}
+		
+		// sets the new text
+		txtEnterYourText.setText(reverseL);
+	}
+	
+	public void wordCount(String getText) {
+		String message = getText;
+		String word = "";
+		ArrayList wordlist = new ArrayList<String>();
 		char letter;
 		
 		for (int i = 0; i < message.length(); i++) {
@@ -72,47 +138,7 @@ public class ReverseText extends JFrame {
 				word = "";
 			}
 		}
-		
-		for (int i = wordlist.size() - 1; i >= 0; i--) {
-			reverseW = reverseW + wordlist.get(i);
-			wordCount++;
-		}
-		
-		// sets the new text
-		txtEnterYourText.setText(reverseW);
-		lblWordCount.setText("Words: " + wordCount);
-		wordCount = 0;
-	}
-	
-	// reverse letter order
-	public void letterReverse (String getText) {
-		String message;
-		String input = getText;
-		String reverseL = "";
-		String word = "";
-		ArrayList wordlist = new ArrayList<String>();
-		String stop = " ";
-		message = input + stop;
-		int wordCount = 0;
-		
-		char space = ' ';
-		char letter;
-		
-		// displays all characters in reverse		
-		for (int i = message.length() - 1; i >= 0; i--) {
-			letter = message.charAt(i);
-			reverseL = reverseL + letter;
-		}
-		
-		for (int i = wordlist.size() - 1; i >= 0; i--) {
-			wordlist.get(i);
-			wordCount++;
-		}
-		
-		// sets the new text
-		txtEnterYourText.setText(reverseL);
-		lblWordCount.setText("Words: " + wordCount);
-		wordCount = 0;
+			lblWordCount.setText("Words: " + (wordlist.size() + 1));
 	}
 	
 	public static void main(String args[]) {
