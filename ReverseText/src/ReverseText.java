@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.StringTokenizer;
 
 public class ReverseText extends JFrame {
 	JTextArea txtEnterYourText = new JTextArea();
@@ -118,10 +119,10 @@ public class ReverseText extends JFrame {
 	
 	public void wordCount(String getText) {
 		String message = getText;
-		String word = "";
+		//if you put only spaces, it starts counting words
+		/*String word = "";
 		ArrayList wordlist = new ArrayList<String>();
 		char letter;
-		
 		for (int i = 0; i < message.length(); i++) {
 			letter = message.charAt(i);
 			if (letter != ' ') {
@@ -137,8 +138,11 @@ public class ReverseText extends JFrame {
 				wordlist.add(word);
 				word = "";
 			}
-		}
-			lblWordCount.setText("Words: " + (wordlist.size() + 1));
+		}*/
+
+		//more on tokens: https://docs.oracle.com/javase/7/docs/api/java/util/StringTokenizer.html
+		StringTokenizer tokens = new StringTokenizer(message);
+		lblWordCount.setText("Words: " + tokens.countTokens());
 	}
 	
 	public static void main(String args[]) {
