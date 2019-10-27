@@ -26,7 +26,8 @@ public class ReverseText extends JFrame {
 				wordCount(getText);
 			}
 		});
-
+		txtEnterYourText.setLineWrap(true);
+		txtEnterYourText.setWrapStyleWord(true);
 		txtEnterYourText.addMouseListener(new MouseAdapter(){
 			@Override
 			public void mouseClicked(MouseEvent e){
